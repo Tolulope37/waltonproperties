@@ -162,14 +162,14 @@
               office, residential, and land options.
             </p>
           </div>
-          <form class="card-elevated contact-form">
+          <form id="contact-form" class="card-elevated contact-form">
             <label>
               Company name
-              <input type="text" name="company" placeholder="Your company" />
+              <input type="text" name="company" placeholder="Your company" required />
             </label>
             <label>
               Email
-              <input type="email" name="email" placeholder="name@company.com" />
+              <input type="email" name="email" placeholder="name@company.com" required />
             </label>
             <label>
               Requirement
@@ -192,5 +192,30 @@
         <a href="#top">Back to top</a>
       </div>
     </footer>
+    <script>
+      const contactForm = document.getElementById("contact-form");
+
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const company = formData.get("company");
+        const email = formData.get("email");
+        const requirement = formData.get("requirement");
+
+        const subject = "Walton Properties Request";
+        const body =
+          "New request details:%0D%0A%0D%0A" +
+          "Company: " + encodeURIComponent(company) + "%0D%0A" +
+          "Email: " + encodeURIComponent(email) + "%0D%0A" +
+          "Requirement: " + encodeURIComponent(requirement);
+
+        window.location.href =
+          "mailto:waltonproperties@gmail.com?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          body;
+      });
+    </script>
   </body>
 </html>
